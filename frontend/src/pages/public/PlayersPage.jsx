@@ -130,7 +130,7 @@ export default function PlayersPage() {
     <section className="sliit-section py-12 sm:py-16">
       <div className="mx-auto max-w-4xl text-center">
         <p className="sliit-pill justify-center">Players</p>
-        <h1 className="sliit-heading mt-6 text-5xl text-white sm:text-6xl">
+        <h1 className="sliit-heading mt-6 text-5xl text-slate-950 sm:text-6xl">
           Search players by name, sport, and leadership role.
         </h1>
         <p className="mt-5 text-lg leading-8 text-sliit-muted">

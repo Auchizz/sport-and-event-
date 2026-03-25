@@ -270,7 +270,7 @@ export default function SportsClubsPage() {
     <section className="sliit-section py-12 sm:py-16">
       <div className="mx-auto max-w-4xl text-center">
         <p className="sliit-pill justify-center">Directory</p>
-        <h1 className="sliit-heading mt-6 text-5xl text-white sm:text-6xl">
+        <h1 className="sliit-heading mt-6 text-5xl text-slate-950 sm:text-6xl">
           Browse and manage sports teams, clubs, and their key contacts.
         </h1>
         <p className="mt-5 text-lg leading-8 text-sliit-muted">
@@ -325,7 +325,7 @@ export default function SportsClubsPage() {
           >
             <div className="mb-8 max-w-3xl">
               <p className="text-sm uppercase tracking-[0.3em] text-sliit-muted">Sports Directory</p>
-              <h2 className="sliit-heading mt-3 text-4xl text-white sm:text-5xl">
+              <h2 className="sliit-heading mt-3 text-4xl text-slate-950 sm:text-5xl">
                 Select a sport to review contacts or update the stored record.
               </h2>
             </div>

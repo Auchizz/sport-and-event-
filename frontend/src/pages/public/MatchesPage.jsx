@@ -115,7 +115,7 @@ export default function MatchesPage() {
     <section className="sliit-section py-12 sm:py-16">
       <div className="mx-auto max-w-4xl text-center">
         <p className="sliit-pill justify-center">Matches</p>
-        <h1 className="sliit-heading mt-6 text-5xl text-white sm:text-6xl">
+        <h1 className="sliit-heading mt-6 text-5xl text-slate-950 sm:text-6xl">
           Publish live action, upcoming fixtures, and completed results.
         </h1>
         <p className="mt-5 text-lg leading-8 text-sliit-muted">

@@ -3,7 +3,7 @@ export default function FeatureHighlights({ items }) {
     <section className="sliit-section py-16">
       <div className="mb-8 max-w-3xl">
         <p className="sliit-pill">Platform Highlights</p>
-        <h2 className="sliit-heading mt-5 text-5xl text-white sm:text-6xl">Everything teams and members need to discover, coordinate, and participate.</h2>
+        <h2 className="sliit-heading mt-5 text-5xl text-slate-950 sm:text-6xl">Everything teams and members need to discover, coordinate, and participate.</h2>
         <p className="mt-4 text-lg leading-8 text-sliit-muted">
           Built to guide members from first discovery to direct team contact, all within a clean and adaptable internal experience.
         </p>
