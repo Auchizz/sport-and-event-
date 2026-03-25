@@ -33,7 +33,7 @@ export default function MatchCard({ match }) {
           {match.homeTeam} <span className="text-sliit-muted">vs</span> {match.awayTeam}
         </div>
         <div className="mt-4 text-4xl font-bold text-white">
-          {match.score ?? 'Fixture Pending'}
+          {match.score || 'Fixture Pending'}
         </div>
         {match.liveNote ? (
           <div className="mt-2 text-sm font-medium text-sliit-gold">{match.liveNote}</div>

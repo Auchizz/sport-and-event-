@@ -100,6 +100,14 @@ select:focus-visible {
     linear-gradient(180deg, rgba(10, 15, 30, 0.98), rgba(11, 20, 38, 1));
 }
 
+.module-shell {
+  @apply overflow-hidden rounded-[2rem] border border-sliit-line/80 text-white;
+  background-image:
+    radial-gradient(circle at top left, rgba(245, 166, 35, 0.18), transparent 28%),
+    radial-gradient(circle at top right, rgba(59, 130, 246, 0.16), transparent 26%),
+    linear-gradient(180deg, rgba(10, 15, 30, 0.98), rgba(11, 20, 38, 1));
+}
+
 .sliit-grid {
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),

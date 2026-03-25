@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { useAuth } from '../../context/AuthContext'
+import moduleApi from '../../api/moduleApi'
 
 function buildDefaultMessage(recipientName, sportOrClubName, entityType) {
-  const label = entityType === 'club' ? 'club' : 'team'
+  const label = entityType === 'club' ? 'group' : 'team'
   return `Hi ${recipientName}, I'm interested in joining the ${sportOrClubName} ${label}. Could you please share more details about how to get involved?`
 }
 
@@ -13,29 +15,32 @@ export default function ContactModal({
   onClose,
   onSuccess
 }) {
+  const { user } = useAuth()
   const initialMessage = useMemo(
     () => buildDefaultMessage(recipientName, sportOrClubName, entityType),
     [recipientName, sportOrClubName, entityType]
   )
   const firstInputRef = useRef(null)
   const [form, setForm] = useState({
-    fullName: '',
-    studentId: '',
-    email: '',
+    fullName: user?.name || '',
+    studentId: user?.studentId || '',
+    email: user?.email || '',
     message: initialMessage
   })
   const [errors, setErrors] = useState({})
   const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   useEffect(() => {
     setForm({
-      fullName: '',
-      studentId: '',
-      email: '',
+      fullName: user?.name || '',
+      studentId: user?.studentId || '',
+      email: user?.email || '',
       message: initialMessage
     })
     setErrors({})
-  }, [initialMessage])
+    setSubmitError('')
+  }, [initialMessage, user])
 
   useEffect(() => {
     const timeoutId = window.setTimeout(() => firstInputRef.current?.focus(), 50)
@@ -53,7 +58,7 @@ export default function ContactModal({
   const validate = () => {
     const nextErrors = {}
     if (!form.fullName.trim()) nextErrors.fullName = 'Full name is required.'
-    if (!form.studentId.trim()) nextErrors.studentId = 'Student ID is required.'
+    if (!form.studentId.trim()) nextErrors.studentId = 'ID is required.'
     if (!form.email.trim()) nextErrors.email = 'Email is required.'
     if (form.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) nextErrors.email = 'Enter a valid email address.'
     if (!form.message.trim()) nextErrors.message = 'Please add a short message.'
@@ -63,9 +68,10 @@ export default function ContactModal({
   const handleChange = (field, value) => {
     setForm((current) => ({ ...current, [field]: value }))
     setErrors((current) => ({ ...current, [field]: undefined }))
+    setSubmitError('')
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
     const nextErrors = validate()
     if (Object.keys(nextErrors).length > 0) {
@@ -73,12 +79,32 @@ export default function ContactModal({
       return
     }
 
-    setSubmitting(true)
-    onSuccess?.()
-    window.setTimeout(() => {
+    try {
+      setSubmitting(true)
+      setSubmitError('')
+
+      await moduleApi.submitInquiry({
+        recipientName,
+        recipientRole,
+        sportOrClubName,
+        entityType,
+        fullName: form.fullName.trim(),
+        studentId: form.studentId.trim(),
+        email: form.email.trim(),
+        message: form.message.trim()
+      })
+
+      onSuccess?.()
+
+      window.setTimeout(() => {
+        setSubmitting(false)
+        onClose()
+      }, 2000)
+    } catch (error) {
+      console.error('submitInquiry', error)
       setSubmitting(false)
-      onClose()
-    }, 2000)
+      setSubmitError(error?.response?.data?.message || 'Unable to send the message right now.')
+    }
   }
 
   return (
@@ -100,7 +126,7 @@ export default function ContactModal({
           <div>
             <p className="sliit-pill mb-4">Contact {recipientRole}</p>
             <h2 id="contact-modal-title" className="sliit-heading text-4xl text-white">
-              Contact {recipientRole} — {recipientName}
+              Contact {recipientRole} - {recipientName}
             </h2>
             <p className="mt-2 text-sm text-sliit-muted">Re: {sportOrClubName}</p>
           </div>
@@ -110,7 +136,7 @@ export default function ContactModal({
             onClick={onClose}
             className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-lg text-white transition hover:border-sliit-gold/40 hover:text-sliit-gold"
           >
-            ×
+            x
           </button>
         </div>
 
@@ -129,12 +155,12 @@ export default function ContactModal({
             </label>
 
             <label className="grid gap-2 text-sm text-sliit-muted">
-              Student ID*
+              Member ID / Registration ID*
               <input
                 className="sliit-input"
                 value={form.studentId}
                 onChange={(event) => handleChange('studentId', event.target.value)}
-                placeholder="IT21XXXXXX"
+                placeholder="ID-001"
               />
               {errors.studentId ? <span className="text-xs text-rose-300">{errors.studentId}</span> : null}
             </label>
@@ -147,7 +173,7 @@ export default function ContactModal({
               className="sliit-input"
               value={form.email}
               onChange={(event) => handleChange('email', event.target.value)}
-              placeholder="you@sliit.lk"
+              placeholder="you@example.com"
             />
             {errors.email ? <span className="text-xs text-rose-300">{errors.email}</span> : null}
           </label>
@@ -163,9 +189,15 @@ export default function ContactModal({
             {errors.message ? <span className="text-xs text-rose-300">{errors.message}</span> : null}
           </label>
 
+          {submitError ? (
+            <div className="rounded-2xl border border-rose-400/30 bg-rose-500/10 px-4 py-3 text-sm text-rose-200">
+              {submitError}
+            </div>
+          ) : null}
+
           <div className="flex flex-col gap-3 border-t border-white/10 pt-4 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm text-sliit-muted">
-              Your message will be queued as a mock request for this demo experience.
+              Your message is saved through the authenticated backend as an inquiry record.
             </p>
             <button type="submit" className="sliit-button-primary min-w-[11rem]" disabled={submitting}>
               {submitting ? 'Sending...' : 'Send Message'}

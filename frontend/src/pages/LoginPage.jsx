@@ -13,8 +13,8 @@ export default function LoginPage() {
     e.preventDefault()
     setError(null)
     try {
-      const ok = await login({ email, password })
-      if (ok) navigate('/dashboard')
+      const loggedInUser = await login({ email, password })
+      if (loggedInUser) navigate('/dashboard')
       else setError('Invalid credentials')
     } catch (err) {
       setError('Login failed')
@@ -26,7 +26,7 @@ export default function LoginPage() {
       <div className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="hidden md:flex flex-col justify-center p-8 rounded-xl bg-gradient-to-br from-primary to-sportgreen text-white">
           <h3 className="text-3xl font-bold">Welcome back</h3>
-          <p className="mt-3 opacity-90">Sign in to access SportSphere — your campus user management platform.</p>
+          <p className="mt-3 opacity-90">Sign in to access SportSphere and the connected sports information tools.</p>
           <div className="mt-6">
             <div className="text-sm">Need help?</div>
             <div className="text-xs opacity-80">Contact your system administrator for access.</div>
@@ -47,6 +47,9 @@ export default function LoginPage() {
             <div className="flex items-center justify-between">
               <button className="btn-primary" type="submit">Login</button>
               <Link to="/register" className="text-sm">Create account</Link>
+            </div>
+            <div className="text-sm text-center">
+              <Link to="/module-admin/login" className="font-medium text-primary">Sports Module Admin Login</Link>
             </div>
             <div className="text-sm text-slate-500 text-center">or continue with</div>
             <div className="flex gap-3 justify-center">

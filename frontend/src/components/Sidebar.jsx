@@ -4,7 +4,8 @@ import { NavLink } from 'react-router-dom'
 const LinkItem = ({ to, children }) => (
   <NavLink
     to={to}
-    className={({ isActive }) => `block px-4 py-2 rounded-lg hover:bg-white/10 ${isActive ? 'bg-white/10 font-semibold' : 'text-white/90'}`}>
+    className={({ isActive }) => `block px-4 py-2 rounded-lg hover:bg-white/10 ${isActive ? 'bg-white/10 font-semibold' : 'text-white/90'}`}
+  >
     {children}
   </NavLink>
 )
@@ -13,18 +14,18 @@ export default function Sidebar({ className = '' }) {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    const handler = () => setOpen(prev => !prev)
+    const handler = () => setOpen((prev) => !prev)
     window.addEventListener('toggleSidebar', handler)
     return () => window.removeEventListener('toggleSidebar', handler)
   }, [])
 
   return (
     <>
-      {/* Desktop sidebar */}
       <aside className={`hidden md:block w-64 bg-primary text-white p-4 space-y-4 ${className}`}>
         <div className="text-2xl font-bold mb-4">SportSphere</div>
         <nav className="flex flex-col gap-2">
           <LinkItem to="/dashboard">Dashboard</LinkItem>
+          <LinkItem to="/dashboard/module">Sports Module</LinkItem>
           <LinkItem to="/profile">Profile</LinkItem>
           <LinkItem to="/users">User Management</LinkItem>
           <LinkItem to="/settings">Settings</LinkItem>
@@ -32,7 +33,6 @@ export default function Sidebar({ className = '' }) {
         <div className="mt-6 text-sm opacity-80">© SportSphere</div>
       </aside>
 
-      {/* Mobile overlay sidebar */}
       {open && (
         <div className="md:hidden fixed inset-0 z-40">
           <div className="absolute inset-0 bg-black/40" onClick={() => setOpen(false)} />
@@ -43,6 +43,7 @@ export default function Sidebar({ className = '' }) {
             </div>
             <nav className="flex flex-col gap-2">
               <LinkItem to="/dashboard">Dashboard</LinkItem>
+              <LinkItem to="/dashboard/module">Sports Module</LinkItem>
               <LinkItem to="/profile">Profile</LinkItem>
               <LinkItem to="/users">User Management</LinkItem>
               <LinkItem to="/settings">Settings</LinkItem>

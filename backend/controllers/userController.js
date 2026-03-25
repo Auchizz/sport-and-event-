@@ -15,7 +15,7 @@ exports.updateUser = async (req, res) => {
     const { id } = req.params;
     const updates = { ...req.body };
     if (updates.password) updates.password = await bcrypt.hash(updates.password, 10);
-    const user = await User.findByIdAndUpdate(id, updates, { new: true }).select('-password');
+    const user = await User.findByIdAndUpdate(id, updates, { returnDocument: 'after' }).select('-password');
     res.json({ success: true, message: 'User updated', data: user });
   } catch (err) {
     res.status(500).json({ success: false, message: 'Server error' });
@@ -36,7 +36,7 @@ exports.updateMyProfile = async (req, res) => {
   try {
     const updates = { ...req.body };
     if (updates.password) updates.password = await bcrypt.hash(updates.password, 10);
-    const user = await User.findByIdAndUpdate(req.user._id, updates, { new: true }).select('-password');
+    const user = await User.findByIdAndUpdate(req.user._id, updates, { returnDocument: 'after' }).select('-password');
     res.json({ success: true, message: 'Profile updated', data: user });
   } catch (err) {
     res.status(500).json({ success: false, message: 'Server error' });

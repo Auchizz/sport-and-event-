@@ -20,7 +20,7 @@ export default function FacilitiesSection({ overview, availability }) {
       <div className="sliit-card overflow-hidden p-6 sm:p-8">
         <div className="max-w-3xl">
           <p className="text-sm uppercase tracking-[0.28em] text-sliit-muted">Availability Grid</p>
-          <h2 className="sliit-heading mt-3 text-4xl text-white sm:text-5xl">Check the latest sample availability before you request a booking.</h2>
+          <h2 className="sliit-heading mt-3 text-4xl text-white sm:text-5xl">Check the latest facility availability before you request a booking.</h2>
         </div>
 
         <div className="mt-8 grid gap-4">
@@ -29,7 +29,7 @@ export default function FacilitiesSection({ overview, availability }) {
               <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                 <div>
                   <h3 className="text-2xl font-semibold text-white">{facility.facility}</h3>
-                  <p className="mt-2 text-sm text-sliit-muted">Sample slot visibility for students booking courts, grounds, and gym spaces.</p>
+                  <p className="mt-2 text-sm text-sliit-muted">Live slot visibility for courts, grounds, halls, and shared activity spaces.</p>
                 </div>
                 <div className="grid gap-3 sm:grid-cols-3">
                   {facility.slots.map((slot) => (
