@@ -12,7 +12,9 @@ import PublicLayout from './layouts/PublicLayout'
 import HomePage from './pages/public/HomePage'
 import SportsClubsPage from './pages/public/SportsClubsPage'
 import JoinTeamPage from './pages/public/JoinTeamPage'
-import ComingSoonPage from './pages/public/ComingSoonPage'
+import MatchesPage from './pages/public/MatchesPage'
+import PlayersPage from './pages/public/PlayersPage'
+import FacilitiesPage from './pages/public/FacilitiesPage'
 
 export default function App() {
   return (
@@ -21,33 +23,9 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/sports-clubs" element={<SportsClubsPage />} />
         <Route path="/join-team" element={<JoinTeamPage />} />
-        <Route
-          path="/matches"
-          element={
-            <ComingSoonPage
-              title="Match Schedules & Results"
-              description="Phase 2 adds live match filters, upcoming fixtures, and completed result cards."
-            />
-          }
-        />
-        <Route
-          path="/players"
-          element={
-            <ComingSoonPage
-              title="Player Information"
-              description="Phase 2 adds the searchable player directory, sport filters, and captain contact actions."
-            />
-          }
-        />
-        <Route
-          path="/facilities"
-          element={
-            <ComingSoonPage
-              title="Facilities Booking"
-              description="Phase 2 adds facility booking guidance and an availability grid for grounds, courts, and gym access."
-            />
-          }
-        />
+        <Route path="/matches" element={<MatchesPage />} />
+        <Route path="/players" element={<PlayersPage />} />
+        <Route path="/facilities" element={<FacilitiesPage />} />
       </Route>
 
       <Route path="/login" element={<LoginPage />} />
