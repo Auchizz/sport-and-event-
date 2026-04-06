@@ -11,7 +11,7 @@ export default function HeroSection({ overview }) {
             <span>Sports Information Module</span>
           </div>
 
-          <h1 className="sliit-heading mt-6 max-w-4xl text-5xl leading-[0.95] text-white sm:text-6xl">
+          <h1 className="sliit-heading mt-6 max-w-4xl text-5xl leading-[0.95] text-black sm:text-6xl">
             One protected space for sports, clubs, players, fixtures, and facilities.
           </h1>
 

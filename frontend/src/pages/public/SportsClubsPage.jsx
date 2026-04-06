@@ -330,7 +330,7 @@ export default function SportsClubsPage() {
               </h2>
             </div>
 
-            <div className="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">
+            <div className="grid items-start gap-4 xl:grid-cols-[1.15fr_0.85fr]">
               {sports.length > 0 ? (
                 <>
                   <SportsGrid sports={sports} selectedId={selectedSport?.id} onSelect={setSelectedSportId} />

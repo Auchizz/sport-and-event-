@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 export default function CTABanner() {
   return (
     <section className="sliit-section py-4">
-      <div className="overflow-hidden rounded-[2rem] border border-sliit-gold/30 bg-gradient-to-r from-sliit-gold/15 via-sliit-panel to-sliit-blue/10 p-6 shadow-gold-glow sm:p-8">
+      <div className="overflow-hidden rounded-[2rem] border border-sliit-gold/30 bg-gradient-to-r from-sliit-soft via-sliit-panel to-sliit-gold/15 p-6 shadow-gold-glow sm:p-8">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-3xl">
             <p className="sliit-pill">Module Workflow</p>

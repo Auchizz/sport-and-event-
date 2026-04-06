@@ -144,24 +144,32 @@ export default function PlayersPage() {
         </div>
       ) : null}
 
-      <div className="mt-10 grid gap-4 rounded-[2rem] border border-white/10 bg-white/5 p-5 shadow-sliit lg:grid-cols-[1.2fr_0.8fr]">
-        <label className="grid gap-2 text-left text-sm text-sliit-muted">
+      <div className="mt-10 grid gap-5 rounded-[2rem] border border-black/10 bg-white/80 p-6 shadow-lg backdrop-blur lg:grid-cols-[1.2fr_0.8fr]">
+        <label className="grid gap-2 text-left text-sm font-semibold text-slate-700">
           Search by player name or sport
-          <input
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            className="sliit-input"
-            placeholder="Search by player name or sport"
-            aria-label="Search players"
-          />
+          <div className="relative mt-1">
+            <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-500">
+              <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M21 21l-4.35-4.35" />
+                <circle cx="11" cy="11" r="7" />
+              </svg>
+            </span>
+            <input
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              className="h-12 w-full rounded-2xl border border-black/30 bg-white pl-11 pr-4 text-sm text-slate-900 shadow-sm placeholder:text-slate-500 focus:border-black/60 focus:outline-none focus:ring-2 focus:ring-sliit-gold/30"
+              placeholder="Search by player name or sport"
+              aria-label="Search players"
+            />
+          </div>
         </label>
 
-        <label className="grid gap-2 text-left text-sm text-sliit-muted">
+        <label className="grid gap-2 text-left text-sm font-semibold text-slate-700">
           Filter by sport
           <select
             value={sportFilter}
             onChange={(event) => setSportFilter(event.target.value)}
-            className="sliit-input"
+            className="h-12 w-full rounded-2xl border border-black/30 bg-white px-4 text-sm text-slate-900 shadow-sm focus:border-black/60 focus:outline-none focus:ring-2 focus:ring-sliit-gold/30"
             aria-label="Filter players by sport"
           >
             {sportOptions.map((sport) => (

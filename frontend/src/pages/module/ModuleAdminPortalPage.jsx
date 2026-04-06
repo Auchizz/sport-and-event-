@@ -64,7 +64,7 @@ export default function ModuleAdminPortalPage() {
     <section className="sliit-section py-12 sm:py-16">
       <div className="max-w-4xl">
         <p className="sliit-pill">Admin Portal</p>
-        <h1 className="sliit-heading mt-6 text-5xl text-white sm:text-6xl">
+        <h1 className="sliit-heading mt-6 text-5xl text-black sm:text-6xl">
           Control center for module administrators.
         </h1>
         <p className="mt-5 text-lg leading-8 text-sliit-muted">

@@ -172,8 +172,8 @@ export default function FacilitiesPage() {
       </div>
 
       {isAdmin ? (
-        <div className="sliit-card mt-8 p-6 sm:p-8">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="sliit-card mt-8 space-y-6 p-6 sm:p-8">
+          <div className="flex flex-col gap-4 border-b border-white/10 pb-5 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-sm uppercase tracking-[0.28em] text-sliit-muted">Admin Form</p>
               <h3 className="mt-2 text-3xl font-semibold text-white">
@@ -193,7 +193,7 @@ export default function FacilitiesPage() {
           </div>
 
           {facilities.length > 0 ? (
-            <div className="mt-6 flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2">
               {facilities.map((facility) => (
                 <button
                   key={facility.id}
@@ -211,23 +211,27 @@ export default function FacilitiesPage() {
             </div>
           ) : null}
 
-          <form className="mt-6 grid gap-4" onSubmit={saveFacility}>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <Field label="Facility name">
-                <input
-                  className="sliit-input"
-                  value={facilityForm.facility}
-                  onChange={(event) => setFacilityForm({ ...facilityForm, facility: event.target.value })}
-                />
-              </Field>
-              <Field label="Description">
-                <textarea
-                  rows="4"
-                  className="sliit-input resize-none"
-                  value={facilityForm.description}
-                  onChange={(event) => setFacilityForm({ ...facilityForm, description: event.target.value })}
-                />
-              </Field>
+          <form className="grid gap-6" onSubmit={saveFacility}>
+            <div className="grid gap-4 sm:grid-cols-3">
+              <div>
+                <Field label="Facility name">
+                  <input
+                    className="sliit-input"
+                    value={facilityForm.facility}
+                    onChange={(event) => setFacilityForm({ ...facilityForm, facility: event.target.value })}
+                  />
+                </Field>
+              </div>
+              <div className="sm:col-span-2">
+                <Field label="Description">
+                  <textarea
+                    rows="4"
+                    className="sliit-input resize-none"
+                    value={facilityForm.description}
+                    onChange={(event) => setFacilityForm({ ...facilityForm, description: event.target.value })}
+                  />
+                </Field>
+              </div>
             </div>
 
             <div className="rounded-[1.5rem] border border-white/10 bg-white/5 p-5">

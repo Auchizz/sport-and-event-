@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:module": "node scripts/moduleSmokeTest.js"
+    "test:module": "node scripts/moduleSmokeTest.js",
+    "init:collections": "node scripts/initCollections.js"
   },
   "keywords": [],
   "author": "",

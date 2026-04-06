@@ -16,9 +16,6 @@ export default function FeatureHighlights({ items }) {
             className="sliit-card group animate-fade-up p-6 transition duration-300 hover:-translate-y-1 hover:border-sliit-gold/35 hover:bg-sliit-panel"
             style={{ animationDelay: `${index * 80}ms` }}
           >
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-sliit-gold/25 bg-sliit-gold/10 text-2xl">
-              {item.icon}
-            </div>
             <h3 className="mt-5 text-2xl font-semibold text-white">{item.title}</h3>
             <p className="mt-3 text-sm leading-7 text-sliit-muted">{item.description}</p>
           </article>
