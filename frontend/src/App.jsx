@@ -4,9 +4,25 @@ import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import Dashboard from './pages/Dashboard'
 import ProfilePage from './pages/ProfilePage'
+import UserManagementPage from './pages/UserManagementPage'
 import SettingsPage from './pages/SettingsPage'
 import NotFoundPage from './pages/NotFoundPage'
 import ProtectedRoute from './components/ProtectedRoute'
+import AdminRoute from './components/AdminRoute'
+import AppShell from './layouts/AppShell'
+import ModuleLayout from './layouts/ModuleLayout'
+import ModuleAdminLoginPage from './pages/module/ModuleAdminLoginPage'
+import ModuleAdminPortalPage from './pages/module/ModuleAdminPortalPage'
+import HomePage from './pages/public/HomePage'
+import SportsClubsPage from './pages/public/SportsClubsPage'
+import JoinTeamPage from './pages/public/JoinTeamPage'
+import MatchesPage from './pages/public/MatchesPage'
+import PlayersPage from './pages/public/PlayersPage'
+import FacilitiesPage from './pages/public/FacilitiesPage'
+import ParticipationPage from './pages/ParticipationPage'
+import FeedbackPage from './pages/FeedbackPage'
+import NotificationsPage from './pages/NotificationsPage'
+import ActivityAdminPage from './pages/ActivityAdminPage'
 
 export default function App() {
   return (
@@ -14,6 +30,7 @@ export default function App() {
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
+      <Route path="/module-admin/login" element={<ModuleAdminLoginPage />} />
 
       <Route
         path="/dashboard"
@@ -27,6 +44,49 @@ export default function App() {
         path="/settings"
         element={<ProtectedRoute><SettingsPage /></ProtectedRoute>}
       />
+      <Route
+        path="/participation"
+        element={<ProtectedRoute><ParticipationPage /></ProtectedRoute>}
+      />
+      <Route
+        path="/feedback"
+        element={<ProtectedRoute><FeedbackPage /></ProtectedRoute>}
+      />
+      <Route
+        path="/notifications"
+        element={<ProtectedRoute><NotificationsPage /></ProtectedRoute>}
+      />
+      <Route
+        path="/users"
+        element={<AdminRoute><UserManagementPage /></AdminRoute>}
+      />
+      <Route
+        path="/activity-admin"
+        element={<AdminRoute><ActivityAdminPage /></AdminRoute>}
+      />
+
+      <Route element={<ProtectedRoute><AppShell /></ProtectedRoute>}>
+        <Route path="/dashboard/module" element={<ModuleLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path="directory" element={<SportsClubsPage />} />
+          <Route path="join" element={<JoinTeamPage />} />
+          <Route path="matches" element={<MatchesPage />} />
+          <Route path="players" element={<PlayersPage />} />
+          <Route path="facilities" element={<FacilitiesPage />} />
+        </Route>
+      </Route>
+
+      <Route
+        element={
+          <AdminRoute redirectTo="/module-admin/login" fallbackTo="/dashboard/module">
+            <AppShell />
+          </AdminRoute>
+        }
+      >
+        <Route path="/dashboard/module" element={<ModuleLayout />}>
+          <Route path="admin" element={<ModuleAdminPortalPage />} />
+        </Route>
+      </Route>
 
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

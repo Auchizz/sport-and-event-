@@ -2,10 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Sidebar from '../components/Sidebar'
 import Navbar from '../components/Navbar'
 import userApi from '../api/userApi'
-import { useAuth } from '../context/AuthContext'
 
 export default function UserManagementPage(){
-  const { user } = useAuth()
   const [users, setUsers] = useState([])
   const [query, setQuery] = useState('')
   const [roleFilter, setRoleFilter] = useState('')
@@ -41,7 +39,7 @@ export default function UserManagementPage(){
                 <select value={roleFilter} onChange={e=>setRoleFilter(e.target.value)} className="px-3 py-2 border rounded-lg">
                   <option value="">All roles</option>
                   <option value="admin">Admin</option>
-                  <option value="member">Member</option>
+                  <option value="student">Student</option>
                 </select>
               </div>
             </div>
@@ -60,7 +58,7 @@ export default function UserManagementPage(){
                 </thead>
                 <tbody>
                   {filtered.map(u=> (
-                    <tr key={u.id} className="hover:bg-slate-50">
+                    <tr key={u._id || u.id} className="hover:bg-slate-50">
                       <td className="py-2">{u.name}</td>
                       <td>{u.email}</td>
                       <td>{u.studentId}</td>
@@ -68,7 +66,7 @@ export default function UserManagementPage(){
                       <td><span className={`px-2 py-1 rounded text-sm ${u.role==='admin'?'bg-primary text-white':'bg-slate-100'}`}>{u.role}</span></td>
                       <td>
                         <button className="px-3 py-1 mr-2 rounded bg-slate-100">Edit Role</button>
-                        <button onClick={()=>removeUser(u.id)} className="px-3 py-1 rounded bg-red-500 text-white">Delete</button>
+                        <button onClick={()=>removeUser(u._id || u.id)} className="px-3 py-1 rounded bg-red-500 text-white">Delete</button>
                       </td>
                     </tr>
                   ))}

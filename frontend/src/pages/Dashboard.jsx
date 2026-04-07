@@ -16,16 +16,16 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-pagebg md:flex">
       <Sidebar />
-      <div className="flex-1">
+      <div className="min-w-0 flex-1">
         <Navbar />
         <main className="px-4 py-6 md:px-8">
           <section className="mb-8 overflow-hidden rounded-[32px] bg-gradient-to-br from-primary via-[#224764] to-sportgreen text-[#fff8ef] shadow-2xl shadow-[rgba(23,50,77,0.16)]">
-            <div className="grid gap-8 p-8 lg:grid-cols-[1.5fr,1fr] lg:p-10">
+            <div className="grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.5fr,1fr] lg:p-10">
               <div>
                 <div className="inline-flex rounded-full border border-[#fff8ef]/10 bg-[#fff8ef]/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-[#fff8ef]/70">
                   Season Ready
                 </div>
-                <h2 className="mt-4 max-w-xl text-4xl font-black tracking-tight">
+                <h2 className="mt-4 max-w-xl text-3xl font-black tracking-tight sm:text-4xl">
                   Welcome back, {user?.name || 'User'}.
                 </h2>
                 <p className="mt-4 max-w-2xl text-sm leading-7 text-[#fff8ef]/74">
@@ -34,6 +34,12 @@ export default function Dashboard() {
                 <div className="mt-8 flex flex-wrap gap-3">
                   <a href="/profile" className="btn-primary">
                     Open Profile Studio
+                  </a>
+                  <a
+                    href="/dashboard/module"
+                    className="inline-flex items-center justify-center rounded-2xl border border-[#fff8ef]/15 bg-[#fff8ef]/10 px-5 py-3 text-sm font-semibold text-[#fff8ef] transition hover:bg-[#fff8ef]/15"
+                  >
+                    Open Sports Module
                   </a>
                   <a
                     href="/settings"
@@ -90,7 +96,7 @@ export default function Dashboard() {
                   ['Faculty captured', user?.faculty ? user.faculty : 'Faculty is still missing from your profile.'],
                   ['Student identity', user?.studentId ? `Student ID ${user.studentId}` : 'Student ID has not been added yet.'],
                 ].map(([title, description]) => (
-                  <div key={title} className="flex gap-4 rounded-[24px] border border-[#eee3d3] bg-[#f8f1e7]/80 p-4">
+                  <div key={title} className="flex flex-col gap-4 rounded-[24px] border border-[#eee3d3] bg-[#f8f1e7]/80 p-4 sm:flex-row">
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#fffdf8] text-lg shadow-sm">
                       •
                     </div>
