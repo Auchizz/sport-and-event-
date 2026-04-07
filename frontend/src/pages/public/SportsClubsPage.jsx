@@ -59,9 +59,7 @@ const toSportForm = (sport) => ({
   team: sport.team || '',
   description: sport.description || '',
   captain: { ...createEmptyContact(), ...sport.captain },
-  viceCaptain: { ...createEmptyContact(), ...sport.viceCaptain },
-  secretary: { ...createEmptyContact(), ...sport.secretary },
-  president: { ...createEmptyContact(), ...sport.president }
+  viceCaptain: { ...createEmptyContact(), ...sport.viceCaptain }
 })
 
 const toClubForm = (club) => ({
@@ -195,9 +193,7 @@ export default function SportsClubsPage() {
       team: sportForm.team.trim(),
       description: sportForm.description.trim(),
       captain: trimContact(sportForm.captain),
-      viceCaptain: trimContact(sportForm.viceCaptain),
-      secretary: trimContact(sportForm.secretary),
-      president: trimContact(sportForm.president)
+      viceCaptain: trimContact(sportForm.viceCaptain)
     }
 
     try {
@@ -403,8 +399,6 @@ export default function SportsClubsPage() {
                   <div className="grid gap-4">
                     <ContactFields title="Captain" value={sportForm.captain} onChange={(field, value) => updateSportContact('captain', field, value)} />
                     <ContactFields title="Vice Captain" value={sportForm.viceCaptain} onChange={(field, value) => updateSportContact('viceCaptain', field, value)} />
-                    <ContactFields title="Secretary" value={sportForm.secretary} onChange={(field, value) => updateSportContact('secretary', field, value)} />
-                    <ContactFields title="President" value={sportForm.president} onChange={(field, value) => updateSportContact('president', field, value)} />
                   </div>
 
                   <div className="flex flex-wrap gap-3 border-t border-white/10 pt-4">

@@ -61,9 +61,7 @@ export const createEmptySportForm = () => ({
   team: '',
   description: '',
   captain: createEmptyContact(),
-  viceCaptain: createEmptyContact(),
-  secretary: createEmptyContact(),
-  president: createEmptyContact()
+  viceCaptain: createEmptyContact()
 })
 
 export const createEmptyClubForm = () => ({

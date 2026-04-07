@@ -8,9 +8,7 @@ const SportSchema = new mongoose.Schema(
     team: { type: String, required: true, trim: true },
     description: { type: String, trim: true, default: '' },
     captain: { type: ContactSchema, required: true },
-    viceCaptain: { type: ContactSchema, required: true },
-    secretary: { type: ContactSchema, required: true },
-    president: { type: ContactSchema, required: true }
+    viceCaptain: { type: ContactSchema, required: true }
   },
   {
     timestamps: true

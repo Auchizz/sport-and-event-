@@ -46,26 +46,6 @@ export default function SportDetailPanel({ sport, onContact }) {
             entityType: 'team'
           })}
         />
-        <ContactPersonCard
-          title="Club Secretary"
-          person={sport.secretary}
-          onContact={() => onContact({
-            recipientName: sport.secretary.name,
-            recipientRole: 'Secretary',
-            sportOrClubName: sport.name,
-            entityType: 'team'
-          })}
-        />
-        <ContactPersonCard
-          title="Club President"
-          person={sport.president}
-          onContact={() => onContact({
-            recipientName: sport.president.name,
-            recipientRole: 'President',
-            sportOrClubName: sport.name,
-            entityType: 'team'
-          })}
-        />
       </div>
     </aside>
   )

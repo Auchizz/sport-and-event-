@@ -1,7 +1,11 @@
 require('dotenv').config();
+const dns = require('node:dns');
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db');
+
+// Force reliable public DNS resolvers for SRV lookups (e.g., MongoDB Atlas URIs).
+dns.setServers(['8.8.8.8', '8.8.4.4']);
 
 const app = express();
 
