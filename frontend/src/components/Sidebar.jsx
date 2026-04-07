@@ -1,52 +1,100 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
-const LinkItem = ({ to, children }) => (
-  <NavLink
-    to={to}
-    className={({ isActive }) => `block px-4 py-2 rounded-lg hover:bg-white/10 ${isActive ? 'bg-white/10 font-semibold' : 'text-white/90'}`}>
-    {children}
-  </NavLink>
-)
+const navItems = [
+  { to: '/dashboard', label: 'Dashboard', icon: '◫' },
+  { to: '/profile', label: 'Profiles', icon: '◎' },
+  { to: '/settings', label: 'Settings', icon: '⚙' },
+]
+
+function LinkItem({ to, label, icon }) {
+  return (
+    <NavLink
+      to={to}
+      className={({ isActive }) =>
+        `group flex items-center gap-3 rounded-2xl px-4 py-3 transition-all duration-200 ${
+          isActive
+            ? 'bg-[#fff8ef] text-primary shadow-lg shadow-[rgba(0,0,0,0.08)]'
+            : 'text-[#f0e7d8]/78 hover:bg-[#fff8ef]/10 hover:text-[#fff8ef]'
+        }`
+      }
+    >
+      <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-black/10 text-lg transition-colors group-hover:bg-[#fff8ef]/10">
+        {icon}
+      </span>
+      <span className="text-sm font-semibold tracking-wide">{label}</span>
+    </NavLink>
+  )
+}
+
+function SidebarContent({ user, onNavigate }) {
+  return (
+    <div className="flex h-full flex-col border-r border-[#274965] bg-gradient-to-b from-primary via-[#1e4260] to-sportgreen p-6 text-[#fff8ef] shadow-2xl shadow-[rgba(23,50,77,0.18)]">
+      <div className="mb-8">
+        <div className="inline-flex rounded-full border border-[#fff8ef]/15 bg-[#fff8ef]/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-[#fff8ef]/72">
+          SportSphere
+        </div>
+        <h2 className="mt-4 text-2xl font-black tracking-tight">Campus Sport Hub</h2>
+        <p className="mt-2 text-sm leading-6 text-[#fff8ef]/74">
+          Profiles, access, and student identity in one place.
+        </p>
+      </div>
+
+      <nav className="flex flex-col gap-2">
+        {navItems.map((item) => (
+          <div key={item.to} onClick={onNavigate}>
+            <LinkItem {...item} />
+          </div>
+        ))}
+      </nav>
+
+      <div className="mt-auto rounded-[24px] border border-[#fff8ef]/10 bg-[#fff8ef]/10 p-4 backdrop-blur">
+        <div className="flex items-center gap-3">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#fff8ef] text-lg font-bold text-primary">
+            {user?.name?.[0] || 'U'}
+          </div>
+          <div className="min-w-0">
+            <div className="truncate text-sm font-semibold">{user?.name || 'User'}</div>
+            <div className="truncate text-xs uppercase tracking-[0.25em] text-[#fff8ef]/60">
+              {user?.role || 'student'}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 export default function Sidebar({ className = '' }) {
   const [open, setOpen] = useState(false)
+  const { user } = useAuth()
 
   useEffect(() => {
-    const handler = () => setOpen(prev => !prev)
+    const handler = () => setOpen((prev) => !prev)
     window.addEventListener('toggleSidebar', handler)
     return () => window.removeEventListener('toggleSidebar', handler)
   }, [])
 
   return (
     <>
-      {/* Desktop sidebar */}
-      <aside className={`hidden md:block w-64 bg-primary text-white p-4 space-y-4 ${className}`}>
-        <div className="text-2xl font-bold mb-4">SportSphere</div>
-        <nav className="flex flex-col gap-2">
-          <LinkItem to="/dashboard">Dashboard</LinkItem>
-          <LinkItem to="/profile">Profile</LinkItem>
-          <LinkItem to="/users">User Management</LinkItem>
-          <LinkItem to="/settings">Settings</LinkItem>
-        </nav>
-        <div className="mt-6 text-sm opacity-80">© SportSphere</div>
+      <aside className={`hidden h-screen w-72 shrink-0 md:sticky md:top-0 md:block ${className}`}>
+        <SidebarContent user={user} />
       </aside>
 
-      {/* Mobile overlay sidebar */}
       {open && (
-        <div className="md:hidden fixed inset-0 z-40">
-          <div className="absolute inset-0 bg-black/40" onClick={() => setOpen(false)} />
-          <div className="absolute left-0 top-0 h-full w-72 bg-primary text-white p-4">
-            <div className="flex items-center justify-between mb-4">
-              <div className="text-2xl font-bold">SportSphere</div>
-              <button onClick={() => setOpen(false)} className="p-2 rounded bg-white/10">✕</button>
+        <div className="fixed inset-0 z-40 md:hidden">
+          <div className="absolute inset-0 bg-primary/45 backdrop-blur-sm" onClick={() => setOpen(false)} />
+          <div className="absolute left-0 top-0 h-full w-[86vw] max-w-80">
+            <div className="relative h-full">
+              <button
+                onClick={() => setOpen(false)}
+                className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-[#fff8ef]/15 bg-[#fff8ef]/10 text-[#fff8ef]"
+              >
+                ✕
+              </button>
+              <SidebarContent user={user} onNavigate={() => setOpen(false)} />
             </div>
-            <nav className="flex flex-col gap-2">
-              <LinkItem to="/dashboard">Dashboard</LinkItem>
-              <LinkItem to="/profile">Profile</LinkItem>
-              <LinkItem to="/users">User Management</LinkItem>
-              <LinkItem to="/settings">Settings</LinkItem>
-            </nav>
           </div>
         </div>
       )}

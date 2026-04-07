@@ -48,6 +48,7 @@ export function AuthProvider({ children }) {
       const profile = await authApi.profile()
       // profile is { success, message, data: user }
       setUser(profile?.data)
+      return profile?.data
     } catch (err) {
       console.error('fetchProfile', err)
       logout()
@@ -57,7 +58,7 @@ export function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout, fetchProfile, loading }}>
+    <AuthContext.Provider value={{ user, token, login, logout, fetchProfile, setUser, loading }}>
       {children}
     </AuthContext.Provider>
   )
