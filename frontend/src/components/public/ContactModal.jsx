@@ -175,7 +175,7 @@ export default function ContactModal({
               onChange={(event) => handleChange('email', event.target.value)}
               placeholder="you@example.com"
             />
-            {errors.email ? <span className="text-xs text-rose-300">{errors.email}</span> : null}
+            {errors.email ? <span className="text-xs text-rose-800">{errors.email}</span> : null}
           </label>
 
           <label className="grid gap-2 text-sm text-sliit-muted">
@@ -186,11 +186,11 @@ export default function ContactModal({
               value={form.message}
               onChange={(event) => handleChange('message', event.target.value)}
             />
-            {errors.message ? <span className="text-xs text-rose-300">{errors.message}</span> : null}
+            {errors.message ? <span className="text-xs text-rose-800">{errors.message}</span> : null}
           </label>
 
           {submitError ? (
-            <div className="rounded-2xl border border-rose-400/30 bg-rose-500/10 px-4 py-3 text-sm text-rose-200">
+            <div className="rounded-2xl border border-rose-800/60 bg-rose-200 px-4 py-3 text-sm text-rose-950">
               {submitError}
             </div>
           ) : null}

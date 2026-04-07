@@ -71,6 +71,30 @@ const buildCrudHandlers = ({ Model, label, sort }) => ({
   }
 });
 
+const normalizeContact = (contact = {}) => ({
+  name: (contact.name || '').trim(),
+  email: (contact.email || '').trim(),
+  phone: (contact.phone || '').trim()
+});
+
+const buildSportPayload = (body = {}) => {
+  const captain = normalizeContact(body.captain);
+  const viceCaptain = normalizeContact(body.viceCaptain);
+
+  // Keep compatibility with older required schema versions while allowing
+  // the current UI to submit only captain and vice-captain contacts.
+  return {
+    name: (body.name || '').trim(),
+    icon: (body.icon || '').trim(),
+    team: (body.team || '').trim(),
+    description: (body.description || '').trim(),
+    captain,
+    viceCaptain,
+    president: normalizeContact(body.president || captain),
+    secretary: normalizeContact(body.secretary || viceCaptain)
+  };
+};
+
 const sportHandlers = buildCrudHandlers({
   Model: Sport,
   label: 'Sport',
@@ -130,8 +154,31 @@ exports.getOverview = async (req, res) => {
 };
 
 exports.listSports = sportHandlers.list;
-exports.createSport = sportHandlers.create;
-exports.updateSport = sportHandlers.update;
+exports.createSport = async (req, res) => {
+  try {
+    const item = await Sport.create(buildSportPayload(req.body));
+    res.status(201).json({ success: true, message: 'Sport created', data: item });
+  } catch (err) {
+    handleServerError(res, err);
+  }
+};
+
+exports.updateSport = async (req, res) => {
+  try {
+    const item = await Sport.findByIdAndUpdate(req.params.id, buildSportPayload(req.body), {
+      returnDocument: 'after',
+      runValidators: true
+    });
+
+    if (!item) {
+      return res.status(404).json({ success: false, message: 'Sport not found' });
+    }
+
+    res.json({ success: true, message: 'Sport updated', data: item });
+  } catch (err) {
+    handleServerError(res, err);
+  }
+};
 exports.deleteSport = sportHandlers.remove;
 
 exports.listClubs = clubHandlers.list;

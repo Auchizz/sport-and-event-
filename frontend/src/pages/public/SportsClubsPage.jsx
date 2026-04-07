@@ -304,7 +304,7 @@ export default function SportsClubsPage() {
       </div>
 
       {error ? (
-        <div className="mt-6 rounded-2xl border border-rose-400/30 bg-rose-500/10 px-4 py-3 text-sm text-rose-200">
+        <div className="mt-6 rounded-2xl border border-rose-800/60 bg-rose-200 px-4 py-3 text-sm text-rose-950">
           {error}
         </div>
       ) : null}
@@ -424,7 +424,7 @@ export default function SportsClubsPage() {
           >
             <div className="mb-8 max-w-3xl">
               <p className="text-sm uppercase tracking-[0.3em] text-sliit-blue">Clubs & Groups</p>
-              <h2 className="sliit-heading mt-3 text-4xl text-white sm:text-5xl">
+              <h2 className="sliit-heading mt-3 text-4xl text-slate-950 sm:text-5xl">
                 Select a club to review contacts or maintain its stored record.
               </h2>
             </div>
