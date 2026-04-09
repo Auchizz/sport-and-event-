@@ -1,5 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
-import LandingPage from './pages/LandingPage'
+import { Route, Routes } from 'react-router-dom'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import Dashboard from './pages/Dashboard'
@@ -9,13 +8,25 @@ import SettingsPage from './pages/SettingsPage'
 import NotFoundPage from './pages/NotFoundPage'
 import ProtectedRoute from './components/ProtectedRoute'
 import AdminRoute from './components/AdminRoute'
+import RootRedirect from './pages/RootRedirect'
+import AppShell from './layouts/AppShell'
+import ModuleLayout from './layouts/ModuleLayout'
+import ModuleAdminLoginPage from './pages/module/ModuleAdminLoginPage'
+import ModuleAdminPortalPage from './pages/module/ModuleAdminPortalPage'
+import HomePage from './pages/public/HomePage'
+import SportsClubsPage from './pages/public/SportsClubsPage'
+import JoinTeamPage from './pages/public/JoinTeamPage'
+import MatchesPage from './pages/public/MatchesPage'
+import PlayersPage from './pages/public/PlayersPage'
+import FacilitiesPage from './pages/public/FacilitiesPage'
 
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<LandingPage />} />
+      <Route path="/" element={<RootRedirect />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
+      <Route path="/module-admin/login" element={<ModuleAdminLoginPage />} />
 
       <Route
         path="/dashboard"
@@ -34,6 +45,23 @@ export default function App() {
         path="/users"
         element={<AdminRoute><UserManagementPage /></AdminRoute>}
       />
+
+      <Route element={<ProtectedRoute><AppShell /></ProtectedRoute>}>
+        <Route path="/dashboard/module" element={<ModuleLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path="directory" element={<SportsClubsPage />} />
+          <Route path="join" element={<JoinTeamPage />} />
+          <Route path="matches" element={<MatchesPage />} />
+          <Route path="players" element={<PlayersPage />} />
+          <Route path="facilities" element={<FacilitiesPage />} />
+        </Route>
+      </Route>
+
+      <Route element={<AdminRoute redirectTo="/module-admin/login" fallbackTo="/dashboard/module"><AppShell /></AdminRoute>}>
+        <Route path="/dashboard/module" element={<ModuleLayout />}>
+          <Route path="admin" element={<ModuleAdminPortalPage />} />
+        </Route>
+      </Route>
 
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

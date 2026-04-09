@@ -33,7 +33,7 @@ export default function ProfilePage(){
                   <form className="space-y-3">
                     <label className="text-sm">Full name</label>
                     <input value={form.name} onChange={e=>setForm({...form,name:e.target.value})} className="w-full px-3 py-2 border rounded-lg" />
-                    <label className="text-sm">Faculty</label>
+                    <label className="text-sm">Department or Unit</label>
                     <input value={form.faculty} onChange={e=>setForm({...form,faculty:e.target.value})} className="w-full px-3 py-2 border rounded-lg" />
                     <div className="flex gap-2">
                       <button className="btn-primary">Save</button>
@@ -44,11 +44,11 @@ export default function ProfilePage(){
                   <div className="space-y-2">
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <div className="text-sm text-slate-500">Student ID</div>
+                        <div className="text-sm text-slate-500">Member ID</div>
                         <div className="font-medium">{user?.studentId || '—'}</div>
                       </div>
                       <div>
-                        <div className="text-sm text-slate-500">Faculty</div>
+                        <div className="text-sm text-slate-500">Department or Unit</div>
                         <div className="font-medium">{user?.faculty || '—'}</div>
                       </div>
                     </div>

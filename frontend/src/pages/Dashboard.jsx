@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Sidebar from '../components/Sidebar'
 import Navbar from '../components/Navbar'
 import SummaryCard from '../components/SummaryCard'
@@ -17,9 +18,10 @@ export default function Dashboard(){
             <div className="card flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <div>
                 <h2 className="text-2xl font-bold">Welcome back, {user?.name || 'User'}</h2>
-                <p className="text-slate-600 mt-1">Here's a quick overview of your account and recent activity.</p>
+                <p className="text-slate-600 mt-1">Here&apos;s a quick overview of your account and recent activity.</p>
               </div>
               <div className="flex gap-3">
+                <Link to="/dashboard/module" className="btn-primary">Open Sports Module</Link>
                 <button className="px-4 py-2 rounded-lg border">Export</button>
                 <button className="btn-primary">New Invite</button>
               </div>
@@ -41,14 +43,14 @@ export default function Dashboard(){
                   <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center">🏃</div>
                   <div>
                     <div className="font-medium">Logged in</div>
-                    <div className="text-sm text-slate-500">Today — from campus network</div>
+                    <div className="text-sm text-slate-500">Today — from your organization network</div>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center">📝</div>
                   <div>
                     <div className="font-medium">Updated profile</div>
-                    <div className="text-sm text-slate-500">Yesterday — changed faculty</div>
+                    <div className="text-sm text-slate-500">Yesterday — updated profile details</div>
                   </div>
                 </li>
               </ul>

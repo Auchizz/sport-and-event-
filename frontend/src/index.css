@@ -1,86 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=DM+Sans:wght@400;500;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'DM Sans', sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+html {
+  scroll-behavior: smooth;
 }
-a:hover {
-  color: #535bf2;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: inherit;
 }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
+  font-family: 'DM Sans', sans-serif;
+  @apply bg-pagebg text-slate-900 antialiased;
 }
 
-/* Ensure root app fills the viewport */
 #root {
   min-height: 100vh;
   width: 100%;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
 button {
   border-radius: 8px;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: border-color 0.25s, transform 0.25s, background-color 0.25s;
 }
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
-
-/* App base overrides to match SportSphere theme */
-body {
-  @apply bg-pagebg text-slate-900 antialiased;
+  outline-offset: 2px;
 }
 
 .card {
@@ -114,5 +91,64 @@ body {
 /* Small UI tweaks */
 .muted { @apply text-slate-500 }
 .badge { @apply inline-flex items-center px-2 py-1 rounded-full text-sm bg-slate-100 }
+
+.sliit-shell {
+  @apply min-h-screen bg-sliit-bg text-white;
+  background-image:
+    radial-gradient(circle at top left, rgba(245, 166, 35, 0.18), transparent 28%),
+    radial-gradient(circle at top right, rgba(59, 130, 246, 0.16), transparent 26%),
+    linear-gradient(180deg, rgba(10, 15, 30, 0.98), rgba(11, 20, 38, 1));
+}
+
+.module-shell {
+  @apply overflow-hidden rounded-[2rem] border border-sliit-line/80 text-white;
+  background-image:
+    radial-gradient(circle at top left, rgba(245, 166, 35, 0.18), transparent 28%),
+    radial-gradient(circle at top right, rgba(59, 130, 246, 0.16), transparent 26%),
+    linear-gradient(180deg, rgba(10, 15, 30, 0.98), rgba(11, 20, 38, 1));
+}
+
+.sliit-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.sliit-card {
+  @apply rounded-3xl border border-sliit-line/80 bg-sliit-panel/90 shadow-sliit-card backdrop-blur;
+}
+
+.sliit-card-soft {
+  @apply rounded-3xl border border-white/10 bg-white/5 backdrop-blur;
+}
+
+.sliit-pill {
+  @apply inline-flex items-center gap-2 rounded-full border border-sliit-gold/30 bg-sliit-gold/10 px-4 py-2 text-sm font-medium text-sliit-gold;
+}
+
+.sliit-button-primary {
+  @apply inline-flex items-center justify-center rounded-full bg-sliit-gold px-5 py-3 font-semibold text-sliit-bg transition duration-200 hover:-translate-y-0.5 hover:bg-[#ffc04d];
+}
+
+.sliit-button-secondary {
+  @apply inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-5 py-3 font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:border-sliit-gold/50 hover:text-sliit-gold;
+}
+
+.sliit-input {
+  @apply w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-sliit-muted transition focus:border-sliit-gold/80 focus:bg-white/10;
+}
+
+.sliit-section {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+
+.sliit-heading {
+  @apply font-heading uppercase tracking-[0.08em];
+}
+
+.sliit-live-dot {
+  @apply inline-block h-2.5 w-2.5 rounded-full bg-rose-500 animate-pulse-dot;
+}
 
 

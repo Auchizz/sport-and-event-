@@ -30,17 +30,17 @@ export function AuthProvider({ children }) {
       axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`
       setToken(token)
       setUser(user)
-      return true
+      return user
     }
-    return false
+    return null
   }
 
-  function logout() {
+  function logout(redirectTo = '/login') {
     localStorage.removeItem('token')
     setToken(null)
     setUser(null)
     delete axiosInstance.defaults.headers.common['Authorization']
-    navigate('/login')
+    navigate(redirectTo)
   }
 
   async function fetchProfile() {
